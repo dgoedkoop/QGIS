@@ -208,6 +208,11 @@ QgsValueRelationWidgetWrapper::ValueRelationCache QgsValueRelationWidgetWrapper:
   request.setSubsetOfAttributes( QgsAttributeList() << ki << vi );
   if ( !config.value( "FilterExpression" ).toString().isEmpty() )
   {
+    QgsExpressionContext context;
+    context << QgsExpressionContextUtils::globalScope()
+    << QgsExpressionContextUtils::projectScope()
+    << QgsExpressionContextUtils::layerScope( layer );
+    request.setExpressionContext( context );
     request.setFilterExpression( config.value( "FilterExpression" ).toString() );
   }
 
