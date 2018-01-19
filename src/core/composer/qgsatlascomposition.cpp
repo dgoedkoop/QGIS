@@ -194,6 +194,8 @@ int QgsAtlasComposition::updateFeatures()
   // select all features with all attributes
   QgsFeatureRequest req;
 
+  req.setExpressionContext( expressionContext );
+
   QScopedPointer<QgsExpression> filterExpression;
   if ( mFilterFeatures && !mFeatureFilter.isEmpty() )
   {
